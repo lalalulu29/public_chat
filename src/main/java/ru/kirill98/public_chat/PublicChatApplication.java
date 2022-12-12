@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class PublicChatApplication {
-	static Logger log = Logger.getLogger(PublicChatApplication.class.getName());
+	private static final Logger log = Logger.getLogger(PublicChatApplication.class.getName());
 
 	public static void main(String[] args) {
 		SpringApplication.run(PublicChatApplication.class, args);

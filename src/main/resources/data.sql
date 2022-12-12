@@ -2,7 +2,7 @@ create table if not exists log
 (
     id      int auto_increment,
     dated   datetime      not null,
-    logger  varchar(50)   not null,
+    logger  varchar(100)   not null,
     level   varchar(10)   not null,
     message varchar(1000) not null,
     constraint LOG_PK
