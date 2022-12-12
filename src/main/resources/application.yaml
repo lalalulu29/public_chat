@@ -1,0 +1,29 @@
+spring:
+  profiles:
+    active: production
+
+server:
+  port: 8181
+
+---
+spring:
+  config:
+    activate:
+      on-profile: production
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://192.168.1.211:3306/public_chat
+    username:
+    password:
+  jpa:
+    show-sql: false
+---
+spring:
+  config:
+    activate:
+      on-profile: test
+  jpa:
+    show-sql: true
+  h2:
+    console:
+      enabled: true
