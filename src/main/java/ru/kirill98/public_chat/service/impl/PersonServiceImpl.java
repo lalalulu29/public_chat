@@ -8,6 +8,8 @@ import ru.kirill98.public_chat.repository.PersonRepository;
 import ru.kirill98.public_chat.service.PersonService;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PersonServiceImpl implements PersonService {
@@ -21,5 +23,21 @@ public class PersonServiceImpl implements PersonService {
         person.setDate(new Date());
         person.setLogin(personDto.getLogin());
         repository.save(person);
+    }
+
+    @Override
+    public List<Person> findAllPeopleWithLogin(String login) {
+        return repository.findByLogin(login);
+    }
+
+    @Override
+    public Person findLastPersonWithLogin(String login) {
+        List<Person> people = repository.findByLogin(login);
+        return people.get(people.size()-1);
+    }
+
+    @Override
+    public Optional<Person> findPersonById(Long id) {
+        return repository.findById(id);
     }
 }
