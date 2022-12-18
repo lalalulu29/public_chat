@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Чат</title>
+    <script type="text/javascript" th:src="@{/js/messages_script.js}"></script>
+</head>
+<body>
+<div th:if="${userAuth}">
+    <form action="#" th:action="@{/messages}" method="post" th:object="${message}">
+        <div>
+            <h3 th:text="${'Ваше сообщение:'}"></h3>
+            <input type="text" th:field="*{body}">
+            <input type="submit" th:value="${'Отправить'}">
+        </div>
+        <div>
+            <h3 th:each="message: ${messagesFromDb}" th:text="${message}" style="white-space: pre;">...</h3>
+        </div>
+    </form>
+
+</div>
+<div th:unless="${userAuth}">
+    <h2 th:text="${'Вы не авторизованы. Вам необходимо авторизоваться'}">...</h2>
+    <input type="button" th:value="${'Авторизоваться'}" th:onclick="go_to_auth_view()">
+</div>
+
+</body>
+</html>

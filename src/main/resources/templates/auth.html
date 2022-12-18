@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Авторизация</title>
+    <script type="text/javascript" th:src="@{/js/auth_script.js}"></script>
+</head>
+<body>
+<h2>Авторизация</h2>
+<div th:if="${userAuth}">
+    <h3 th:text="${'Вы уже были авторизованы, ваш логин: ' + userAuth}">...</h3>
+    <div>
+        <input type="button" th:value="'Чат'" th:onclick="go_to_messages()">
+        <input type="button" th:value="'Выйти'" th:onclick="go_to_logout()">
+    </div>
+
+</div>
+
+<div th:unless="${userAuth}">
+    <h3 th:text="${'Придумайте себе логин'}">...</h3>
+    <form action="#" th:action="@{/auth}" method="post" th:object="${person}">
+        <input type="text" th:placeholder="${'Логин'}" th:field="*{login}">
+        <div>
+            <input type="submit" th:value="${'Авторизоваться'}">
+        </div>
+    </form>
+
+
+</div>
+
+</body>
+</html>
