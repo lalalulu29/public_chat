@@ -26,12 +26,14 @@ public class MessagesController {
     @GetMapping("/messages")
     public String getMessagesView(HttpServletRequest request, Model model) {
         HttpSession session = request.getSession();
-        List<MessageDto> listOfMessage = messageService.findAllMessages();
-        Collections.reverse(listOfMessage);
         String login = (String) session.getAttribute("login");
         model.addAttribute("userAuth", login);
         model.addAttribute("message", new MessageDto());
-        model.addAttribute("messagesFromDb", listOfMessage);
+        if(login != null) {
+            List<MessageDto> listOfMessage = messageService.findAllMessages();
+            Collections.reverse(listOfMessage);
+            model.addAttribute("messagesFromDb", listOfMessage);
+        }
         return "messages";
     }
 
