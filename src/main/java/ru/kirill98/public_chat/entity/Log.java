@@ -74,7 +74,7 @@ public class Log {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, date, logger, level, message);
+        return Objects.hash(date, logger, level, message);
     }
 
     @Override
