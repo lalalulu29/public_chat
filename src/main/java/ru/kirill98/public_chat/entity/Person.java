@@ -1,6 +1,10 @@
 package ru.kirill98.public_chat.entity;
 
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
 import javax.persistence.*;
+import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -17,8 +21,9 @@ public class Person {
 
     private Date date;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JoinColumn(name = "person_id")
+    @Fetch(FetchMode.SUBSELECT)
     private List<Message> messages;
 
     public Person() {
@@ -76,7 +81,7 @@ public class Person {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, address, login, date, messages);
+        return Objects.hash(address, login, date, messages);
     }
 
     @Override
